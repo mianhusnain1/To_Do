@@ -76,7 +76,7 @@ class _SplashState extends State<Splash> {
                     color: Colors.white.withOpacity(0.9)),
                 child: const Center(
                   child: Text(
-                    "Powered by: Mian Husnain",
+                    "Powered by: Fade Hive",
                     style: TextStyle(
                         fontFamily: "Montserrat - Bold",
                         color: Color.fromARGB(255, 0, 110, 201),
