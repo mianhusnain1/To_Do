@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   _buildPercentageWidget(),
                   Text(
-                    "Tasks Completed",
+                    "sjdfbwojgwobw",
                     style: TextStyle(
                         color: Colors.white.withOpacity(0.9),
                         fontSize: 17,
