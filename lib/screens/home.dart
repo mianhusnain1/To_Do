@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Today's ${getDayOfWeek()}",
+                    "Todassady's ${getDayOfWeek()}",
                     style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
