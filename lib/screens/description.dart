@@ -60,7 +60,8 @@ class _DescriptionState extends State<Description> {
           title: Text(
             item == null ? 'Add Item' : 'Edit Item',
             style: const TextStyle(
-                fontFamily: 'Montserrat - Bold', color: Colors.blue),
+                fontFamily: 'Montserrat - Bold',
+                color: Color.fromARGB(255, 59, 121, 214)),
           ),
           content: TextFormField(
             textCapitalization: TextCapitalization.sentences,
@@ -68,7 +69,8 @@ class _DescriptionState extends State<Description> {
             decoration: const InputDecoration(
               hintText: 'Description item',
               hintStyle: TextStyle(
-                  color: Colors.blue, fontFamily: 'Montserrat - Light'),
+                  color: Color.fromARGB(255, 59, 121, 214),
+                  fontFamily: 'Montserrat - Light'),
             ),
           ),
           actions: [
@@ -79,15 +81,15 @@ class _DescriptionState extends State<Description> {
               child: const Text(
                 "Cancel",
                 style: TextStyle(
-                  color: Colors.blue,
+                  color: Color.fromARGB(255, 59, 121, 214),
                   fontFamily: 'Montserrat - Regular',
                 ),
               ),
             ),
             ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.blue)),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Color.fromARGB(255, 59, 121, 214))),
                 onPressed: () {
                   if (controller.text.isNotEmpty) {
                     if (item == null) {
@@ -139,7 +141,7 @@ class _DescriptionState extends State<Description> {
                   style: TextStyle(
                     fontFamily: 'Montserrat - Bold',
                     fontSize: 16,
-                    color: Colors.blue,
+                    color: Color.fromARGB(255, 59, 121, 214),
                   ),
                 ),
                 const SizedBox(width: 20),
@@ -148,16 +150,16 @@ class _DescriptionState extends State<Description> {
                   style: const TextStyle(
                     fontFamily: 'Montserrat - Regular',
                     fontSize: 16,
-                    color: Colors.blue,
+                    color: Color.fromARGB(255, 59, 121, 214),
                   ),
                 )
               ],
             ),
             const Divider(
-              color: Colors.blue,
+              color: Color.fromARGB(255, 59, 121, 214),
               thickness: 0.2,
-              indent: 10,
-              endIndent: 10,
+              indent: 2,
+              endIndent: 2,
             ),
             Row(
               children: [
@@ -166,7 +168,7 @@ class _DescriptionState extends State<Description> {
                   style: TextStyle(
                     fontFamily: 'Montserrat - Bold',
                     fontSize: 16,
-                    color: Colors.blue,
+                    color: Color.fromARGB(255, 59, 121, 214),
                   ),
                 ),
                 const SizedBox(width: 20),
@@ -175,32 +177,41 @@ class _DescriptionState extends State<Description> {
                   style: const TextStyle(
                     fontFamily: 'Montserrat - Regular',
                     fontSize: 16,
-                    color: Colors.blue,
+                    color: Color.fromARGB(255, 59, 121, 214),
                   ),
                 )
               ],
             ),
             const Divider(
-              color: Colors.blue,
+              color: Color.fromARGB(255, 59, 121, 214),
               thickness: 0.2,
-              indent: 10,
-              endIndent: 10,
+              indent: 2,
+              endIndent: 2,
             ),
-            const Center(
-              child: Text(
-                "Description:",
-                style: TextStyle(
-                  color: Colors.blue,
-                  fontFamily: 'Montserrat - Bold',
-                  fontSize: 16,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2.0),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.035,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 59, 121, 214),
+                ),
+                child: const Center(
+                  child: Text(
+                    "Description:",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Montserrat - Bold',
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
               ),
             ),
             const Divider(
-              color: Colors.blue,
+              color: Color.fromARGB(255, 59, 121, 214),
               thickness: 0.2,
-              indent: 10,
-              endIndent: 10,
+              indent: 2,
+              endIndent: 2,
             ),
             ...descriptionItems.asMap().entries.map((entry) {
               int index = entry.key;
@@ -208,14 +219,15 @@ class _DescriptionState extends State<Description> {
               return Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: ListTile(
+                  minTileHeight: 20,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   tileColor:
-                      Color.fromARGB(255, 209, 227, 255).withOpacity(0.4),
+                      const Color.fromARGB(255, 209, 227, 255).withOpacity(0.4),
                   title: Text(
                     item,
                     style: const TextStyle(
-                        color: Colors.blue,
+                        color: Color.fromARGB(255, 59, 121, 214),
                         fontFamily: 'Montserrat - Medium',
                         fontSize: 16),
                   ),
@@ -225,7 +237,7 @@ class _DescriptionState extends State<Description> {
                       IconButton(
                         icon: const Icon(
                           Icons.edit,
-                          color: Colors.blue,
+                          color: Color.fromARGB(255, 59, 121, 214),
                         ),
                         onPressed: () {
                           _showItemDialog(item: item, index: index);

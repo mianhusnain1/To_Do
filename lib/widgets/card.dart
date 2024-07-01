@@ -120,7 +120,7 @@ class _TaskCardState extends State<TaskCard> {
                       Text(
                         widget.task.title,
                         style: const TextStyle(
-                            color: Colors.blue,
+                            color: Color.fromARGB(255, 59, 121, 214),
                             fontFamily: 'Montserrat - Bold',
                             fontSize: 22,
                             fontWeight: FontWeight.w500),
@@ -130,7 +130,7 @@ class _TaskCardState extends State<TaskCard> {
                         width: 120,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Colors.blue,
+                          color: Color.fromARGB(255, 59, 121, 214),
                         ),
                         child: const Center(
                           child: Text(
