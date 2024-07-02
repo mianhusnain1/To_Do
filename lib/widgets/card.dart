@@ -28,9 +28,9 @@ class _TaskCardState extends State<TaskCard> {
     }
   }
 
-  void _updateTaskCompletion(TaskModel task, bool isCompleted) {
+  void _updateTaskCompletion(TaskModel task, bool iscomp) {
     setState(() {
-      task.isCompleted = isCompleted;
+      task.isCompleted = iscomp;
       task.save();
     });
   }

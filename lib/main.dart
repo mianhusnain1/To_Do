@@ -5,7 +5,7 @@ import 'package:to_do/models/taskmodel.dart';
 import 'package:to_do/screens/splashscreen.dart';
 
 void main() async {
-  Hive.initFlutter();
+  Hive.initFlutter(); // initialize hive with flutter
 
   WidgetsFlutterBinding
       .ensureInitialized(); // ensure that the Flutter framework is properly initialized before you run the app
