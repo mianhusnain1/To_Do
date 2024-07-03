@@ -138,7 +138,7 @@ class _DescriptionState extends State<Description> {
                   "Title:",
                   style: TextStyle(
                     fontFamily: 'Montserrat - Bold',
-                    fontSize: 22,
+                    fontSize: 16,
                     color: Colors.blue,
                   ),
                 ),
@@ -147,7 +147,7 @@ class _DescriptionState extends State<Description> {
                   widget.task.title,
                   style: const TextStyle(
                     fontFamily: 'Montserrat - Regular',
-                    fontSize: 22,
+                    fontSize: 16,
                     color: Colors.blue,
                   ),
                 )
@@ -165,7 +165,7 @@ class _DescriptionState extends State<Description> {
                   "Location:",
                   style: TextStyle(
                     fontFamily: 'Montserrat - Bold',
-                    fontSize: 22,
+                    fontSize: 16,
                     color: Colors.blue,
                   ),
                 ),
@@ -174,7 +174,7 @@ class _DescriptionState extends State<Description> {
                   widget.task.location,
                   style: const TextStyle(
                     fontFamily: 'Montserrat - Regular',
-                    fontSize: 22,
+                    fontSize: 16,
                     color: Colors.blue,
                   ),
                 )
@@ -192,7 +192,7 @@ class _DescriptionState extends State<Description> {
                 style: TextStyle(
                   color: Colors.blue,
                   fontFamily: 'Montserrat - Bold',
-                  fontSize: 22,
+                  fontSize: 16,
                 ),
               ),
             ),
@@ -209,7 +209,7 @@ class _DescriptionState extends State<Description> {
                 padding: const EdgeInsets.all(2.0),
                 child: ListTile(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
+                      borderRadius: BorderRadius.circular(10)),
                   tileColor:
                       Color.fromARGB(255, 209, 227, 255).withOpacity(0.4),
                   title: Text(
@@ -217,7 +217,7 @@ class _DescriptionState extends State<Description> {
                     style: const TextStyle(
                         color: Colors.blue,
                         fontFamily: 'Montserrat - Medium',
-                        fontSize: 20),
+                        fontSize: 16),
                   ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
