@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:to_do/Boxes/box.dart';
 import 'package:to_do/models/taskmodel.dart';
 import 'package:to_do/screens/graph.dart';
+import 'package:to_do/widgets/card.dart';
 import 'package:to_do/widgets/gradient.dart';
 import '../widgets/add_task.dart';
 import 'all_tasks.dart';
@@ -60,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: taskview(context, (task) => !task.isCompleted,
+                  child: taskviewhome(context, (task) => !task.isCompleted,
                       Colors.white, Colors.white, Colors.white),
                 ),
               ),
@@ -68,6 +70,52 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget taskviewhome(BuildContext context, bool Function(TaskModel) filter,
+      Color delColor, editColor, nothingtextColor) {
+    return ValueListenableBuilder<Box<TaskModel>>(
+      valueListenable: Boxes.getData().listenable(),
+      builder: (context, box, _) {
+        var data = box.values.toList().cast<TaskModel>().where(filter).toList();
+        data.sort((a, b) => a.datetime.compareTo(b.datetime));
+
+        if (data.isEmpty) {
+          return Column(
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              LottieBuilder.asset(
+                "assets/lottie/nothing.json",
+                height: 200,
+              ),
+              Text(
+                'Nothing Found !',
+                style: TextStyle(
+                    color: nothingtextColor,
+                    fontSize: 18,
+                    fontFamily: 'Montserrat - SemiBold'),
+              ),
+              const SizedBox(
+                height: 150,
+              )
+            ],
+          );
+        }
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            return TaskCard(
+              task: data[index],
+              key: Key(data[index].key.toString()),
+              delColor: delColor,
+              editColor: editColor,
+            );
+          },
+        );
+      },
     );
   }
 
@@ -154,7 +202,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ? Colors.orange
                       : Colors.green,
               fontSize: 24,
-              // fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat - Bold'),
         );
       },
