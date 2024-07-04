@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (Context) => TaskCompletionGauge()));
+                      builder: (context) => const TaskCompletionGauge()));
             },
             child: CircleAvatar(
               backgroundColor: Colors.white,
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(100),
                   boxShadow: [
                     BoxShadow(
-                        offset: Offset(1, 3),
+                        offset: const Offset(1, 3),
                         color: Colors.black.withOpacity(.05),
                         blurRadius: 3,
                         spreadRadius: 3)
