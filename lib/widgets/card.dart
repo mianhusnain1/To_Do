@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:to_do/models/taskmodel.dart';
+import 'package:to_do/screens/description.dart';
 import 'package:to_do/screens/edit_task.dart';
 import '../widgets/permission_dialogs.dart';
 
@@ -92,143 +93,155 @@ class _TaskCardState extends State<TaskCard> {
           ),
         ],
       ),
-      child: Card(
-        elevation: 5,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        color: Colors.white,
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.13,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      widget.task.title,
-                      style: const TextStyle(
-                          color: Colors.blue,
-                          fontFamily: 'Montserrat - Bold',
-                          fontSize: 22,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.025,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.blue,
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Description(
+                        task: widget.task,
+                      )));
+        },
+        child: Card(
+          elevation: 5,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          color: Colors.white,
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.13,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        widget.task.title,
+                        style: const TextStyle(
+                            color: Colors.blue,
+                            fontFamily: 'Montserrat - Bold',
+                            fontSize: 22,
+                            fontWeight: FontWeight.w500),
                       ),
-                      child: const Center(
-                        child: Text(
-                          'Date and Time',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Montserrat - Regular',
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      widget.task.location,
-                      style: const TextStyle(
-                        fontFamily: 'Montserrat - Regular',
-                        color: Color.fromARGB(255, 3, 86, 155),
-                        fontSize: 18,
-                      ),
-                    ),
-                    Text(
-                      " ${TimeOfDay.fromDateTime(widget.task.datetime).format(context)}",
-                      style: const TextStyle(
-                        color: Color.fromARGB(255, 20, 128, 218),
-                        fontSize: 18,
-                        fontFamily: 'Montserrat - Bold',
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 2),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return PermissionDialog(
-                              title: 'Task',
-                              content: 'Have you Completed this\nTask?',
-                              onConfirm: () async {
-                                _updateTaskCompletion(
-                                  widget.task,
-                                  true,
-                                );
-                                Navigator.of(context).pop();
-                              },
-                              onCancel: () {
-                                Navigator.of(context).pop();
-                              },
-                            );
-                          },
-                        );
-                      },
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * 0.03,
-                        width: 100,
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.025,
+                        width: 120,
                         decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                offset: Offset(1, 3),
-                                blurRadius: 3,
-                                spreadRadius: 1,
-                                color: Colors.black.withOpacity(0.1))
-                          ],
-                          color: widget.task.isCompleted
-                              ? Colors.green
-                              : Colors.red.withOpacity(0.95),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: Colors.white.withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.blue,
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Date and Time',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Montserrat - Regular',
+                            ),
                           ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              widget.task.isCompleted ? 'Completed' : 'Pending',
-                              style: const TextStyle(
-                                  fontFamily: 'Montserrat - Regular',
-                                  color: Colors.white,
-                                  fontSize: 12),
-                            ),
-                            const Icon(
-                              Icons.arrow_forward_ios,
-                              size: 12,
-                              color: Colors.white,
-                            ),
-                          ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        widget.task.location,
+                        style: const TextStyle(
+                          fontFamily: 'Montserrat - Regular',
+                          color: Color.fromARGB(255, 3, 86, 155),
+                          fontSize: 18,
                         ),
                       ),
-                    ),
-                    Text(
-                      "${widget.task.datetime.day}-${widget.task.datetime.month}-${widget.task.datetime.year}",
-                      style: const TextStyle(
-                          color: Color.fromARGB(255, 5, 75, 133),
-                          fontSize: 20,
-                          fontFamily: 'Montserrat - Regular',
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ],
-                ),
-              ],
+                      Text(
+                        " ${TimeOfDay.fromDateTime(widget.task.datetime).format(context)}",
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 20, 128, 218),
+                          fontSize: 18,
+                          fontFamily: 'Montserrat - Bold',
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return PermissionDialog(
+                                title: 'Task',
+                                content: 'Have you Completed this\nTask?',
+                                onConfirm: () async {
+                                  _updateTaskCompletion(
+                                    widget.task,
+                                    true,
+                                  );
+                                  Navigator.of(context).pop();
+                                },
+                                onCancel: () {
+                                  Navigator.of(context).pop();
+                                },
+                              );
+                            },
+                          );
+                        },
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.03,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  offset: Offset(1, 3),
+                                  blurRadius: 3,
+                                  spreadRadius: 1,
+                                  color: Colors.black.withOpacity(0.1))
+                            ],
+                            color: widget.task.isCompleted
+                                ? Colors.green
+                                : Colors.red.withOpacity(0.95),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.3),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                widget.task.isCompleted
+                                    ? 'Completed'
+                                    : 'Pending',
+                                style: const TextStyle(
+                                    fontFamily: 'Montserrat - Regular',
+                                    color: Colors.white,
+                                    fontSize: 12),
+                              ),
+                              const Icon(
+                                Icons.arrow_forward_ios,
+                                size: 12,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "${widget.task.datetime.day}-${widget.task.datetime.month}-${widget.task.datetime.year}",
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 5, 75, 133),
+                            fontSize: 20,
+                            fontFamily: 'Montserrat - Regular',
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

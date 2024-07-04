@@ -114,13 +114,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               );
             },
-            child: CircleAvatar(
-              backgroundColor:
-                  const Color.fromARGB(255, 86, 191, 245).withOpacity(0.2),
-              radius: 30,
-              child: Icon(
-                Icons.add,
-                color: Colors.white.withOpacity(1),
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  boxShadow: [
+                    BoxShadow(
+                        offset: Offset(1, 3),
+                        color: Colors.black.withOpacity(.05),
+                        blurRadius: 3,
+                        spreadRadius: 3)
+                  ]),
+              child: CircleAvatar(
+                backgroundColor:
+                    const Color.fromARGB(255, 86, 191, 245).withOpacity(0.2),
+                radius: 30,
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white.withOpacity(1),
+                ),
               ),
             ),
           ),
@@ -137,7 +148,11 @@ class _HomeScreenState extends State<HomeScreen> {
         return Text(
           "${percentage.toStringAsFixed(2)}%",
           style: TextStyle(
-              color: percentage <= 50 ? Colors.red : Colors.green,
+              color: percentage <= 33
+                  ? Colors.red
+                  : percentage <= 66
+                      ? Colors.orange
+                      : Colors.green,
               fontSize: 24,
               // fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat - Bold'),
@@ -200,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white.withOpacity(01),
                           )),
-                      Positioned(left: 33, child: _buildPercentageWidget()),
+                      Positioned(left: 28, child: _buildPercentageWidget()),
                     ],
                   ),
                   Text(

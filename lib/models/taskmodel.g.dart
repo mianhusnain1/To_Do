@@ -17,11 +17,11 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TaskModel(
-      title: fields[0] as String,
-      location: fields[1] as String,
-      datetime: fields[3] as DateTime,
-      isCompleted: fields[2] as bool,
-      description: fields[4] as String,
+      title: fields[0] as String? ?? '',
+      location: fields[1] as String? ?? '',
+      isCompleted: fields[2] as bool? ?? false,
+      datetime: fields[3] as DateTime? ?? DateTime.now(),
+      description: fields[4] as String? ?? '',
     );
   }
 

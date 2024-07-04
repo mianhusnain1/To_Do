@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:to_do/Boxes/box.dart';
 import 'package:to_do/models/taskmodel.dart';
+import 'package:to_do/screens/all_tasks.dart';
 
 class TaskCompletionGauge extends StatefulWidget {
   const TaskCompletionGauge({Key? key}) : super(key: key);
@@ -35,43 +36,118 @@ class _TaskCompletionGaugeState extends State<TaskCompletionGauge> {
               fontSize: 25),
         ),
       ),
-      body: Container(
-        child: SfRadialGauge(
-          axes: <RadialAxis>[
-            RadialAxis(
-              minimum: 0,
-              maximum: 100,
-              ranges: <GaugeRange>[
-                GaugeRange(
-                  startValue: 0,
-                  endValue: 33,
-                  color: Colors.red,
+      body: ValueListenableBuilder<Box<TaskModel>>(
+          valueListenable: Boxes.getData().listenable(),
+          builder: (context, box, _) {
+            double percentage = _calculateCompletedPercentage(box);
+            return Column(
+              children: [
+                const SizedBox(
+                  height: 30,
                 ),
-                GaugeRange(
-                  startValue: 33,
-                  endValue: 66,
-                  color: Colors.orange,
+                Center(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: SfRadialGauge(
+                      axes: <RadialAxis>[
+                        RadialAxis(
+                          minimum: 0,
+                          maximum: 100,
+                          ranges: <GaugeRange>[
+                            GaugeRange(
+                              startValue: 0,
+                              endValue: 33,
+                              color: Colors.red,
+                            ),
+                            GaugeRange(
+                              startValue: 33,
+                              endValue: 66,
+                              color: Colors.orange,
+                            ),
+                            GaugeRange(
+                              startValue: 66,
+                              endValue: 100,
+                              color: Colors.green,
+                            ),
+                          ],
+                          pointers: <GaugePointer>[
+                            NeedlePointer(
+                              value: percentage,
+                            ),
+                          ],
+                          annotations: <GaugeAnnotation>[
+                            GaugeAnnotation(
+                              widget: _buildPercentageWidget(),
+                              angle: 90,
+                              positionFactor: 0.75,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                GaugeRange(
-                  startValue: 66,
-                  endValue: 100,
-                  color: Colors.green,
+                percentage < 33
+                    ? const Text(
+                        "You have too many pending tasks.",
+                        style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 15,
+                            fontFamily: 'Montserrat - Medium'),
+                      )
+                    : percentage < 66
+                        ? const Text(
+                            "You have some pending tasks.",
+                            style: TextStyle(
+                                color: Colors.orange,
+                                fontSize: 15,
+                                fontFamily: 'Montserrat - Medium'),
+                          )
+                        : percentage < 99
+                            ? const Text(
+                                "You have only few pending tasks.",
+                                style: TextStyle(
+                                    color: Colors.green,
+                                    fontSize: 15,
+                                    fontFamily: 'Montserrat - Medium'),
+                              )
+                            : const Text(
+                                "Great! You are roll model.",
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 15,
+                                    fontFamily: 'Montserrat - Medium'),
+                              ),
+                const SizedBox(
+                  height: 10,
                 ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AllTask()));
+                  },
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.035,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: const Center(
+                      child: Text(
+                        "View Tasks",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Montserrat - Bold',
+                            fontSize: 16),
+                      ),
+                    ),
+                  ),
+                )
               ],
-              pointers: <GaugePointer>[
-                NeedlePointer(),
-              ],
-              annotations: <GaugeAnnotation>[
-                GaugeAnnotation(
-                  widget: _buildPercentageWidget(),
-                  angle: 90,
-                  positionFactor: 0.75,
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+            );
+          }),
     );
   }
 
