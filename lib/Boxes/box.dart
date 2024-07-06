@@ -6,7 +6,8 @@ import 'package:to_do/models/taskmodel.dart';
 import 'package:to_do/widgets/card.dart';
 
 class Boxes {
-  static Box<TaskModel> getData() => Hive.box<TaskModel>("Task");
+  static Box<TaskModel> getData() => Hive.box<TaskModel>(
+      "Task"); // here getData(); is fucntion that has return type  Box<TaskModel>, here Box is used for the hive to store data
 }
 
 Widget taskview(BuildContext context, bool Function(TaskModel) filter,
@@ -16,6 +17,7 @@ Widget taskview(BuildContext context, bool Function(TaskModel) filter,
     builder: (context, box, _) {
       var data = box.values.toList().cast<TaskModel>().where(filter).toList();
       data.sort((a, b) => a.datetime.compareTo(b.datetime));
+
       if (data.isEmpty) {
         return Column(
           // crossAxisAlignment: CrossAxisAlignment.center,

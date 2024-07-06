@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Dialogss {
+class Dialogs {
   static Future<void> showAlertDialog(
       BuildContext context, String title, message) {
     return showDialog(
