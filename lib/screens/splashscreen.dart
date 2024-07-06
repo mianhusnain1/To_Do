@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lottie/lottie.dart';
 import 'package:to_do/screens/home.dart';
 import 'dart:ui';
 
@@ -48,7 +49,9 @@ class _SplashState extends State<Splash> {
             const SizedBox(
               height: 10,
             ),
-            const SpinKitFadingCircle(color: Colors.white),
+            SizedBox(
+              child: LottieBuilder.asset("assets/lottie.loading.json"),
+            ),
             const SizedBox(
               height: 10,
             ),
