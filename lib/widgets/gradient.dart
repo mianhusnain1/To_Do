@@ -5,8 +5,8 @@ class Widgets {
     return Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(colors: [
-        Color.fromARGB(255, 86, 191, 245),
-        Color.fromARGB(255, 25, 90, 189),
+        Color(0xFF56BFF5),
+        Color(0xFF195ABD),
       ], begin: Alignment.bottomLeft, end: Alignment.topRight)),
     );
   }

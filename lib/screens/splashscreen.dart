@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lottie/lottie.dart';
 import 'package:to_do/screens/home.dart';
 import 'dart:ui';
@@ -17,7 +15,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 30), () {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     });
@@ -27,43 +25,71 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
-      body: Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [
-          Color.fromARGB(255, 25, 90, 189),
-          Color.fromARGB(255, 86, 191, 245)
-        ], begin: Alignment.bottomLeft, end: Alignment.topRight)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              backgroundColor: Colors.white,
-              radius: 80,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: ClipRRect(
-                  child: Image.asset("assets/images/Logo.png"),
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(colors: [
+              Color.fromARGB(255, 25, 90, 189),
+              Color.fromARGB(255, 86, 191, 245)
+            ], begin: Alignment.bottomLeft, end: Alignment.topRight)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 80,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: ClipRect(
+                      child: Image.asset("assets/images/Logo.jpg"),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                LottieBuilder.asset(
+                  "assets/lottie/loading.json",
+                  height: 150,
+                  width: MediaQuery.of(context).size.width,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                // const Text(
+                //   "App is loading...",
+                //   style: TextStyle(
+                //       color: Colors.white,
+                //       fontSize: 20,
+                //       fontWeight: FontWeight.w600),
+                // )
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 30.0),
+              child: Container(
+                height: 50,
+                width: MediaQuery.of(context).size.width - 80,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.white.withOpacity(0.9)),
+                child: const Center(
+                  child: Text(
+                    "Powered by: Mian Husnain",
+                    style: TextStyle(
+                        fontFamily: "Montserrat - Bold",
+                        color: Color.fromARGB(255, 0, 110, 201),
+                        fontSize: 16),
+                  ),
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              child: LottieBuilder.asset("assets/lottie.loading.json"),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Text(
-              "App is loading...",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
