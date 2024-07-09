@@ -43,6 +43,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
+                maxLength: 20,
                 style: const TextStyle(
                     color: Colors.black, fontFamily: 'Montserrat - Regular'),
                 initialValue: widget.task.title,
@@ -52,6 +53,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                     hintStyle: TextStyle(fontFamily: 'Montserrat - Bold')),
               ),
               TextFormField(
+                maxLength: 20,
                 style: const TextStyle(
                     color: Colors.black, fontFamily: 'Montserrat - Regular'),
                 initialValue: widget.task.location,
