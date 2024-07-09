@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:to_do/models/taskmodel.dart';
+import 'package:to_do/screens/edit_task.dart';
 import '../widgets/permission_dialogs.dart';
 
 class TaskCard extends StatefulWidget {
@@ -44,7 +45,9 @@ class _TaskCardState extends State<TaskCard> {
         children: [
           SlidableAction(
             onPressed: (context) {
-              // Implement edit functionality
+              showDialog(
+                  context: context,
+                  builder: (context) => EditTaskScreen(task: widget.task));
             },
             backgroundColor: Colors.white.withOpacity(0),
             foregroundColor: widget.editColor,
@@ -59,7 +62,6 @@ class _TaskCardState extends State<TaskCard> {
         children: [
           SlidableAction(
             onPressed: (context) {
-              // _delete(widget.task);
               showDialog(
                   context: context,
                   builder: (context) {
@@ -69,7 +71,8 @@ class _TaskCardState extends State<TaskCard> {
                         onConfirm: () {
                           _delete(widget.task);
                           Navigator.of(context).pop();
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
                             content: Text(
                               'Task Has been Deleted Successfully.',
                               style:
@@ -94,7 +97,7 @@ class _TaskCardState extends State<TaskCard> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         color: Colors.white,
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.135,
+          height: MediaQuery.of(context).size.height * 0.13,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

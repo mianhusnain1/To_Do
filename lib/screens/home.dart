@@ -137,8 +137,8 @@ class _HomeScreenState extends State<HomeScreen> {
         double percentage = _calculateCompletedPercentage(box);
         return Text(
           "${percentage.toStringAsFixed(2)}%",
-          style: const TextStyle(
-              color: Colors.white,
+          style: TextStyle(
+              color: percentage <= 50 ? Colors.red : Colors.green,
               fontSize: 24,
               // fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat - Bold'),
@@ -192,7 +192,18 @@ class _HomeScreenState extends State<HomeScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  _buildPercentageWidget(),
+                  Stack(
+                    children: [
+                      Container(
+                          height: MediaQuery.of(context).size.height * .04,
+                          width: MediaQuery.of(context).size.width * .37,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white.withOpacity(01),
+                          )),
+                      Positioned(left: 33, child: _buildPercentageWidget()),
+                    ],
+                  ),
                   Text(
                     "Tasks Completed",
                     style: TextStyle(

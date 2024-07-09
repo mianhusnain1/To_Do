@@ -203,11 +203,7 @@ class _TaskInputDialogState extends State<TaskInputDialog> {
               if (_selectedDate == null || _selectedTime == null) {
                 Dialogs.showAlertDialog(context, "Error",
                     "Please select your desired date and time.");
-                // ScaffoldMessenger.of(context).showSnackBar(
-                //   SnackBar(
-                //     content: Text('Please select both date and time'),
-                //   ),
-                // );
+
                 return;
               }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do/models/taskmodel.dart';
 
 class Dialogs {
   static Future<void> showAlertDialog(
@@ -36,5 +37,9 @@ class Dialogs {
             ],
           );
         });
+  }
+
+  static Future<void> editDialog(BuildContext context, TaskModel task) {
+    return showDialog(context: context, builder: (context) => AlertDialog());
   }
 }
