@@ -15,7 +15,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 30), () {
+    Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     });
@@ -40,9 +40,13 @@ class _SplashState extends State<Splash> {
                   backgroundColor: Colors.white,
                   radius: 80,
                   child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: ClipRect(
-                      child: Image.asset("assets/images/Logo.jpg"),
+                    padding: const EdgeInsets.all(3.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.asset(
+                        "assets/images/Logo.jpg",
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),

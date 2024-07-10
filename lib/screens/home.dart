@@ -3,7 +3,6 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do/Boxes/box.dart';
 import 'package:to_do/models/taskmodel.dart';
-import 'package:to_do/screens/navbar.dart';
 import 'package:to_do/widgets/gradient.dart';
 import '../widgets/dialog.dart';
 import 'all_tasks.dart';
@@ -84,9 +83,15 @@ class _HomeScreenState extends State<HomeScreen> {
               //     context, MaterialPageRoute(builder: (Context) => Navbar()));
             },
             child: CircleAvatar(
-              backgroundColor:
-                  const Color.fromARGB(255, 86, 191, 245).withOpacity(0.2),
-              radius: 30,
+              backgroundColor: Colors.white,
+              radius: 28,
+              child: Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Image.asset("assets/images/Logo.jpg"),
+                ),
+              ),
             ),
           ),
           const Spacer(),
@@ -130,15 +135,13 @@ class _HomeScreenState extends State<HomeScreen> {
       valueListenable: Boxes.getData().listenable(),
       builder: (context, box, _) {
         double percentage = _calculateCompletedPercentage(box);
-        return Container(
-          child: Text(
-            "${percentage.toStringAsFixed(2)}%",
-            style: const TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                // fontWeight: FontWeight.bold,
-                fontFamily: 'Montserrat - Bold'),
-          ),
+        return Text(
+          "${percentage.toStringAsFixed(2)}%",
+          style: const TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              // fontWeight: FontWeight.bold,
+              fontFamily: 'Montserrat - Bold'),
         );
       },
     );
@@ -225,14 +228,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: MediaQuery.of(context).size.height * 0.035,
                   width: MediaQuery.of(context).size.width * 0.40,
                   decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 78, 135, 221),
+                      color: const Color.fromARGB(255, 78, 135, 221),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
                             color: Colors.black.withOpacity(0.2),
                             blurRadius: 3,
                             spreadRadius: 1,
-                            offset: Offset(1, 3))
+                            offset: const Offset(1, 3))
                       ]),
                   child: const Center(
                     child: Text(
