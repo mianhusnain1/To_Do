@@ -57,13 +57,6 @@ class _SplashState extends State<Splash> {
                 const SizedBox(
                   height: 10,
                 ),
-                // const Text(
-                //   "App is loading...",
-                //   style: TextStyle(
-                //       color: Colors.white,
-                //       fontSize: 20,
-                //       fontWeight: FontWeight.w600),
-                // )
               ],
             ),
           ),
