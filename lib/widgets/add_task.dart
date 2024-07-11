@@ -217,6 +217,7 @@ class _TaskInputDialogState extends State<TaskInputDialog> {
                 _selectedTime!.minute,
               );
               final data = TaskModel(
+                description: "",
                 title: title,
                 location: location,
                 datetime: dateTime,

@@ -186,10 +186,10 @@ class _TaskCardState extends State<TaskCard> {
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
-                                offset: Offset(0, 1),
-                                blurRadius: 4,
+                                offset: Offset(1, 3),
+                                blurRadius: 3,
                                 spreadRadius: 1,
-                                color: Colors.black.withOpacity(0.3))
+                                color: Colors.black.withOpacity(0.1))
                           ],
                           color: widget.task.isCompleted
                               ? Colors.green

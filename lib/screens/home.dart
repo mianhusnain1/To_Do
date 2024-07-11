@@ -3,6 +3,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do/Boxes/box.dart';
 import 'package:to_do/models/taskmodel.dart';
+import 'package:to_do/screens/graph.dart';
 import 'package:to_do/widgets/gradient.dart';
 import '../widgets/add_task.dart';
 import 'all_tasks.dart';
@@ -56,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildHeader(),
               const SizedBox(height: 10),
               _buildMiddle(),
-
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -64,7 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       Colors.white, Colors.white, Colors.white),
                 ),
               ),
-              // _buildbottom(),
             ],
           ),
         ],
@@ -79,8 +78,10 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           InkWell(
             onTap: () {
-              // Navigator.push(
-              //     context, MaterialPageRoute(builder: (Context) => Navbar()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (Context) => TaskCompletionGauge()));
             },
             child: CircleAvatar(
               backgroundColor: Colors.white,
@@ -109,9 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return const TaskInputDialog(
-                      // onSave: _addTask,
-                      );
+                  return const TaskInputDialog();
                 },
               );
             },

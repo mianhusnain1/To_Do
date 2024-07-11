@@ -12,7 +12,6 @@ class EditTaskScreen extends StatefulWidget {
 }
 
 class _EditTaskScreenState extends State<EditTaskScreen> {
-  late DateTime _dateTime;
   DateTime? _selectedDate;
   TimeOfDay? _selectedTime;
   final _formKey = GlobalKey<FormState>();
@@ -44,11 +43,23 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
   }
 
   void _saveTask() {
-    setState(() {
-      widget.task.datetime = _dateTime;
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      if (_selectedDate != null && _selectedTime != null) {
+        final DateTime selectedDateTime = DateTime(
+          _selectedDate!.year,
+          _selectedDate!.month,
+          _selectedDate!.day,
+          _selectedTime!.hour,
+          _selectedTime!.minute,
+        );
+        widget.task.datetime = selectedDateTime;
+      }
+
       widget.task.save();
-    });
-    Navigator.of(context).pop();
+      Navigator.of(context).pop();
+    }
   }
 
   @override
@@ -92,13 +103,14 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
               ),
               const SizedBox(height: 20),
               const Text(
-                "Due Date and Time",
+                "Change Date and Time",
                 style: TextStyle(
                     color: Color.fromARGB(255, 1, 52, 94),
                     fontFamily: 'Montserrat - SemiBold',
                     fontSize: 15),
               ),
               TextButton(
+                // key: _formKey,
                 onPressed: () => _selectDate(context),
                 child: Text(
                     _selectedDate == null
@@ -110,64 +122,16 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                     )),
               ),
               TextButton(
+                // key: _formKey,
                 onPressed: () => _selectTime(context),
                 child: Text(
                     _selectedTime == null
-                        ? 'Time: Not selected'
+                        ? 'Select Time'
                         : 'Time: ${_selectedTime!.format(context)}',
                     style: const TextStyle(
                       color: Colors.blue,
                       fontFamily: 'Montserrat - Regular',
                     )),
-              ),
-              TextButton(
-                onPressed: () async {
-                  final DateTime? pickedDate = await showDatePicker(
-                    context: context,
-                    initialDate: _dateTime,
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime(2101),
-                  );
-                  if (pickedDate != null && pickedDate != _dateTime) {
-                    setState(() {
-                      _dateTime = pickedDate;
-                    });
-                  }
-                },
-                child: const Text(
-                  'Select Date',
-                  style: TextStyle(
-                      fontFamily: 'Montserrat - Regular',
-                      fontSize: 13,
-                      color: Colors.blue),
-                ),
-              ),
-              TextButton(
-                onPressed: () async {
-                  final TimeOfDay? pickedTime = await showTimePicker(
-                    context: context,
-                    initialTime: TimeOfDay.fromDateTime(_dateTime),
-                  );
-                  if (pickedTime != null) {
-                    // final now = DateTime.now();
-                    setState(() {
-                      _dateTime = DateTime(
-                        _dateTime.year,
-                        _dateTime.month,
-                        _dateTime.day,
-                        pickedTime.hour,
-                        pickedTime.minute,
-                      );
-                    });
-                  }
-                },
-                child: const Text(
-                  'Select Time',
-                  style: TextStyle(
-                      fontFamily: 'Montserrat - Regular',
-                      fontSize: 13,
-                      color: Colors.blue),
-                ),
               ),
             ],
           ),
@@ -188,11 +152,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.blue)),
             onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-                widget.task.save();
-              }
-              Navigator.of(context).pop();
+              _saveTask();
             },
             child: const Text(
               "Size",
