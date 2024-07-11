@@ -15,6 +15,32 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
   late DateTime _dateTime;
   final _formKey = GlobalKey<FormState>();
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2100),
+    );
+    if (pickedDate != null) {
+      setState(() {
+        _dateTime = pickedDate;
+      });
+    }
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (pickedTime != null) {
+      setState(() {
+        // _selectedTime = pickedTime;
+      });
+    }
+  }
+
   void _saveTask() {
     setState(() {
       widget.task.datetime = _dateTime;
@@ -63,6 +89,33 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                     hintStyle: TextStyle(fontFamily: 'Montserrat - Bold')),
               ),
               SizedBox(height: 20),
+              const Text(
+                "Due Date and Time",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 1, 52, 94),
+                    fontFamily: 'Montserrat - SemiBold',
+                    fontSize: 15),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      widget.task.datetime.toString(),
+                      style: const TextStyle(
+                        fontFamily: 'Montserrat - Regular',
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => _selectDate(context),
+                    child: const Text('Select Date',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontFamily: 'Montserrat - Regular',
+                        )),
+                  ),
+                ],
+              ),
               TextButton(
                 onPressed: () async {
                   final DateTime? pickedDate = await showDatePicker(

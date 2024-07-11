@@ -184,12 +184,20 @@ class _TaskCardState extends State<TaskCard> {
                         height: MediaQuery.of(context).size.height * 0.03,
                         width: 100,
                         decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(0, 1),
+                                blurRadius: 4,
+                                spreadRadius: 1,
+                                color: Colors.black.withOpacity(0.3))
+                          ],
                           color: widget.task.isCompleted
                               ? Colors.green
                               : Colors.red.withOpacity(0.95),
                           borderRadius: BorderRadius.circular(20),
-                          border:
-                              Border.all(color: Colors.white.withOpacity(0.3)),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.3),
+                          ),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

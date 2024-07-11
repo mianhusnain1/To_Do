@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:to_do/Boxes/box.dart';
 import 'package:to_do/models/taskmodel.dart';
 import 'package:to_do/widgets/gradient.dart';
-import '../widgets/dialog.dart';
+import '../widgets/add_task.dart';
 import 'all_tasks.dart';
 
 class HomeScreen extends StatefulWidget {
