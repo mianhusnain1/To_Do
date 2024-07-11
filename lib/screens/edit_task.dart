@@ -13,6 +13,8 @@ class EditTaskScreen extends StatefulWidget {
 
 class _EditTaskScreenState extends State<EditTaskScreen> {
   late DateTime _dateTime;
+  DateTime? _selectedDate;
+  TimeOfDay? _selectedTime;
   final _formKey = GlobalKey<FormState>();
 
   Future<void> _selectDate(BuildContext context) async {
@@ -24,7 +26,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
     );
     if (pickedDate != null) {
       setState(() {
-        _dateTime = pickedDate;
+        _selectedDate = pickedDate;
       });
     }
   }
@@ -36,7 +38,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
     );
     if (pickedTime != null) {
       setState(() {
-        // _selectedTime = pickedTime;
+        _selectedTime = pickedTime;
       });
     }
   }
@@ -88,7 +90,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                     hintText: "Edit Location",
                     hintStyle: TextStyle(fontFamily: 'Montserrat - Bold')),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               const Text(
                 "Due Date and Time",
                 style: TextStyle(
@@ -96,25 +98,27 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                     fontFamily: 'Montserrat - SemiBold',
                     fontSize: 15),
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.task.datetime.toString(),
-                      style: const TextStyle(
-                        fontFamily: 'Montserrat - Regular',
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () => _selectDate(context),
-                    child: const Text('Select Date',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontFamily: 'Montserrat - Regular',
-                        )),
-                  ),
-                ],
+              TextButton(
+                onPressed: () => _selectDate(context),
+                child: Text(
+                    _selectedDate == null
+                        ? "Select date"
+                        : 'Date: ${_selectedDate!.day}-${_selectedDate!.month}-${_selectedDate!.year}',
+                    style: const TextStyle(
+                      color: Colors.blue,
+                      fontFamily: 'Montserrat - Regular',
+                    )),
+              ),
+              TextButton(
+                onPressed: () => _selectTime(context),
+                child: Text(
+                    _selectedTime == null
+                        ? 'Time: Not selected'
+                        : 'Time: ${_selectedTime!.format(context)}',
+                    style: const TextStyle(
+                      color: Colors.blue,
+                      fontFamily: 'Montserrat - Regular',
+                    )),
               ),
               TextButton(
                 onPressed: () async {
