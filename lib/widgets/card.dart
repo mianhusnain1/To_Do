@@ -130,7 +130,7 @@ class _TaskCardState extends State<TaskCard> {
                         width: 120,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Color.fromARGB(255, 59, 121, 214),
+                          color: const Color.fromARGB(255, 59, 121, 214),
                         ),
                         child: const Center(
                           child: Text(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:to_do/models/taskmodel.dart';
 
 class Description extends StatefulWidget {
@@ -213,50 +214,72 @@ class _DescriptionState extends State<Description> {
               indent: 2,
               endIndent: 2,
             ),
-            ...descriptionItems.asMap().entries.map((entry) {
-              int index = entry.key;
-              String item = entry.value;
-              return Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: ListTile(
-                  minTileHeight: 20,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  tileColor:
-                      const Color.fromARGB(255, 209, 227, 255).withOpacity(0.4),
-                  title: Text(
-                    item,
-                    style: const TextStyle(
+            if (descriptionItems.isEmpty)
+              Column(
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  LottieBuilder.asset(
+                    "assets/lottie/nothing.json",
+                    height: 200,
+                  ),
+                  const Text(
+                    'Nothing Found !',
+                    style: TextStyle(
                         color: Color.fromARGB(255, 59, 121, 214),
-                        fontFamily: 'Montserrat - Medium',
-                        fontSize: 16),
+                        fontSize: 18,
+                        fontFamily: 'Montserrat - SemiBold'),
                   ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.edit,
+                  const SizedBox(
+                    height: 150,
+                  )
+                ],
+              )
+            else
+              ...descriptionItems.asMap().entries.map((entry) {
+                int index = entry.key;
+                String item = entry.value;
+                return Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: ListTile(
+                    minTileHeight: 20,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    tileColor: const Color.fromARGB(255, 209, 227, 255)
+                        .withOpacity(0.4),
+                    title: Text(
+                      item,
+                      style: const TextStyle(
                           color: Color.fromARGB(255, 59, 121, 214),
+                          fontFamily: 'Montserrat - Medium',
+                          fontSize: 16),
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.edit,
+                            color: Color.fromARGB(255, 59, 121, 214),
+                          ),
+                          onPressed: () {
+                            _showItemDialog(item: item, index: index);
+                          },
                         ),
-                        onPressed: () {
-                          _showItemDialog(item: item, index: index);
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.delete,
-                          color: Color.fromARGB(255, 255, 90, 78),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.delete,
+                            color: Color.fromARGB(255, 255, 90, 78),
+                          ),
+                          onPressed: () {
+                            _deleteItem(index);
+                          },
                         ),
-                        onPressed: () {
-                          _deleteItem(index);
-                        },
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              );
-            }).toList(),
+                );
+              }).toList(),
           ],
         ),
       ),
